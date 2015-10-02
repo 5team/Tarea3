@@ -1,0 +1,574 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h> 
+#include <conio.h> 
+#define MAX 128
+
+
+int main(){
+    int opcion =0;
+    do{
+    
+    printf("%s", "\tÂ°Â°Â°Â°Â°Â°ENCRIPTACIONÂ°Â°Â°ÂÂ°Â°Â°Â°\n");
+    printf("%s", "\t\tElige:\n");
+    printf("%s", "\tc1 1Â°-C E S A R-------->>\n");
+    printf("%s", "\tc2 2Â°-E S C I T A L A-------->>\n");
+    printf("%s", "\tc3 3Â°-M O R S E-------->>\n");
+    printf("%s", "\tc4 4Â°-ASCII-------->>\n");
+    
+    scanf("%d", &opcion);
+    if (opcion==1){
+      cesar();
+
+   }//end of if
+
+   if (opcion==2){
+      escitala();
+   }//end of if 2
+   if (opcion == 3){
+      morse();
+   }//end of if 3
+   if (opcion == 4){
+      ascii();
+   }//end of if 4
+
+  
+
+    
+    
+    
+    printf ("%s","\n\n1=Para regresar al menu de Encriptacion\n\n2=Para salir de programa\n");
+   scanf("%d", &opcion);
+   }//end of do
+   while(opcion!=2);{
+    system("color 3");
+    printf
+    ("%s", "\nÂ°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°\n");
+    printf("%s", "\nÂ°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°\n");
+    printf("%s", "\nÂ°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°\n");
+    printf("%s", "\n\n--------------GRACIAS POR USAR ESTE PROGRAMA----------->");
+    printf("%s", "\nÂ°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°\n");
+    printf("%s", "\nÂ°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°\n");
+    printf("%s", "\nÂ°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°Â°\n");
+
+
+   }//end of while
+
+
+}//end of menu
+
+
+
+
+
+void encriptar(char frase[MAX],int numero);
+void desencriptar(char frase[MAX],int numero);
+ 
+//FunciÃ³n para desencriptar
+void desencriptar(char frase[MAX],int numero)
+{  
+    FILE *tex;
+    tex = fopen("archivo.txt", "w");
+    int i=0;
+    while(frase[i]!='\0')
+    {
+        frase[i]=frase[i]-numero;
+        i++;
+         
+    }
+    fprintf(tex,"%s",frase);
+    fclose(tex);
+}
+
+//FunciÃ³n para encriptar 
+void encriptar(char frase[MAX],int numero)
+{
+    FILE *tex;
+    tex = fopen("archivo.txt", "w");
+    int i=0;
+    char letra;
+    while(frase[i]!='\0')
+    {
+        frase[i]=frase[i]+numero;
+        i++;
+       
+    }
+     fprintf(tex,"%s",frase);
+     fclose(tex);
+}
+ 
+ 
+//Procedimiento principal.
+int cesar()
+{
+    //Variables necesarias
+    FILE *archivo; 
+    int x,des;
+    char cadena[MAX],nombre1[MAX];
+    printf("Encriptacion/Desencriptacion:\n");
+    printf("        METODO CESAR:\n");
+    printf("-----------------------------\n");
+    printf("Nombre del fichero a codificar a cesar: ");
+    scanf("%s", &nombre1);
+    archivo = fopen(nombre1,"r");
+    if (archivo == NULL){ 
+     exit(1); 
+    } 
+    printf("\nEl contenido del archivo de prueba es \n\n"); 
+    while (feof(archivo) == 0){ 
+    fgets(cadena,MAX,archivo); 
+    printf("%s\n",cadena); 
+    } 
+    printf("introduce un numero : ");
+    scanf("%d",&x);
+    printf("1 Encriptacion\n2 Desencriptacion\n Elige la opcion: ");
+    scanf("%d",&des);
+    if(des==1){
+    //VacÃ­a el buffer del teclado
+    while(getchar()!='\n');
+    //Llamamos a la funciÃ³n encriptar
+    encriptar(cadena, x);
+    getchar();
+    }else if(des==2){
+    //Llamamos a la funciÃ³n desencriptar
+    desencriptar(cadena, x);
+    getchar();
+    }
+    //Salimos
+    getchar();
+}
+
+//Funciones de Codigo Escitala
+void cifrarEsci(char palabras[], int caras)
+{
+	char codpal[50], pal[50]; 
+	FILE *tex;
+    tex = fopen("archivo.txt", "w");
+    int j;
+	//inicializamos el arreglo en cada casilla con un valor igual a ' ' (vacio);	
+	for(j=0; j<50; j++)
+	{
+		codpal[j]=' ';
+		pal[j]=' ';
+	}
+	//Determinamos si es la mitad exacta
+	int validar_mitad_frase = (50 % caras);
+	if(validar_mitad_frase!=0){
+		caras+=1;
+	}
+	int col = (50/ caras);
+	//Codifica palabras
+	int i;
+	for(i=0; i<50; i++)
+	{
+		codpal[i] = palabras[((caras) * (i % col)) + (i / col)];
+	}
+	fprintf(tex,codpal);
+    fclose(tex);
+	printf("\n\n");
+}
+//decodificador
+void decifrarEsci(char codpal[], int caras)
+{
+	char palabras[50];
+	FILE *tex;
+    tex = fopen("archivo.txt", "w");
+	//inicializamos el arreglo en cada casilla con un valor ugual a ' ' (vacio);	
+	int j;
+	for(j=0; j<50; j++)
+	{
+		palabras[j]=' ';
+	}
+	//Determinamos si es la mitad exacta
+	int validar_mitad_frase = (50 % caras);
+	//determinamos las columnas de la frase
+	int col = (50/ caras);
+	//comprobamos si es la mitad exacta o no
+	if(validar_mitad_frase!=0)
+	{
+		//re calculamos la mitad de la frase
+		col = 50/caras+1;
+	}
+	//decodificamos la frase codificada
+	int i;
+	for(i=0; i<50; i++)
+	{
+		palabras[i] = codpal[((col) * (i % (caras))) + (i / caras)];
+	}
+	fprintf(tex,codpal);
+    fclose(tex);
+}
+
+int escitala()
+{
+    //Variables necesarias
+    char palabras[50];
+    int caras=0,i=0,des;
+    FILE *archivo;
+    char cadena[MAX],nombre1[MAX];
+    printf("Encriptacion/Desencriptacion:\n");
+    printf("        METODO ESCITALA:\n");
+    printf("-----------------------------\n");
+    printf("Nombre del fichero a codificar a cesar: ");
+    scanf("%s", &nombre1);
+    archivo = fopen(nombre1,"r");
+    if (archivo == NULL){ 
+     exit(1); 
+    } 
+    printf("1 Encriptacion\n2 Desencriptacion\n Elige la opcion: ");
+    scanf("%d",&des);
+    printf("\nEl contenido del archivo de prueba es \n\n"); 
+    while (feof(archivo) == 0){ 
+    fgets(cadena,MAX,archivo); 
+    printf("%s\n",cadena); 
+    } 
+    printf("Numero de caras\n\n");
+    scanf("%d",&i);
+    if(des==1){
+    //VacÃ­a el buffer del teclado
+    while(getchar()!='\n');
+    //Llamamos a la funciÃ³n encriptar
+    cifrarEsci(cadena, i);
+    getchar();
+    }else if(des==2){
+    //Llamamos a la funciÃ³n desencriptar
+    decifrarEsci(cadena, i);
+    getchar();
+    }
+    //Salimos
+    getchar();
+}
+int ascii(){ 
+                int opci=0;
+				//Seleccionamos una opcion 
+				FILE *archivo;
+                char nombre1[MAX];
+                int tam;
+                printf("Encriptacion/Desencriptacion:\n");
+                printf("        METODO ESCITALA:\n");
+                printf("-----------------------------\n");
+                printf("Nombre del fichero a codificar a cesar: ");
+                scanf("%s", &nombre1);
+                printf("1.- Tamaño de la frace\n\n");
+				scanf("%d",&tam);
+				printf("1.- Cifrar a ASCII.\n2.- Desifrar ASCII.\n\n");
+				scanf("%d",&opci);
+     				
+				//comparamos el dato resivido con un if 
+				if(opci==1)
+				{	
+					char caracter[50];
+					int j;
+					for(j=0; j<=tam; j++)
+					{
+						caracter[j]=' ';
+					}
+					
+					//abrimos archivo para su cifrado
+					 archivo = fopen(nombre1,"r");
+					int i=0;
+					//llenamos el arriglo creado anteriormente con los datos del archivo
+					while(feof(archivo)==0)
+					{
+						caracter[i]=fgetc(archivo);
+						i++;
+					}
+					
+					//cerramos el archivo
+					fclose(archivo);
+					//empesamos a cifrar el archivo
+	   				for (j = 0; j<=tam; j++)
+					{
+	      				printf("\'%d\' == %c\n", caracter[j], caracter[j]); 
+					}
+					//abrimos el archivo para la escritura 
+					FILE *tex;
+                    tex = fopen("archivo.txt", "w");
+					//escribimos el archivo con los datos cifrados osea que imprimimos los numeros del codigo ascii
+					for(i = 0; i<50; i++)
+					{
+						fprintf(tex,"%d\n",caracter[i]);	
+					}
+					//cerramos el archivo
+					fclose(tex);
+				}
+				else if(opci==2)
+				{
+					// lo mismo que en el primer if pero ahora lo vamos a 
+					// desifrar
+					FILE *fp;
+					FILE *esc;
+					char c[50],i=0;
+					int j;
+					for(j=0; j<=tam; j++){
+						c[i]=' ';
+					}
+					fp=fopen(nombre1, "r");
+					esc=fopen("tex.txt","wt");
+					while(feof(fp)==0){
+						fscanf(fp,"%d",c);
+						printf("%s",c);
+						fprintf(esc,"%s",c);
+					}
+					
+					fclose(esc);
+				}
+}
+int morse(){
+
+unsigned char frase[50];
+int i;
+int e;
+FILE *archivo;
+char cadena[MAX],nombre1[MAX];
+printf("\n\n--->Codificacion Morse<----\n\n");
+printf("============ CODIGO MORSE =============\n");
+printf( "\n|A .-    |  B -... |  C -.-. |  D -..  |\n");
+printf( "|E .     |  F ..-. |  G --.  |  H .... |\n");
+printf( "|I ..    |  J .--- |  K -.-  |  L .-.. |\n");
+printf( "|M --    |  N -.   |  O ---  |  P .--. |\n");
+printf( "|Q --.-  |  R .-.  |  S ...  |  T -    |\n");
+printf( "|U ..-   |  V ...- |  W .--  |  X -..- |\n");
+printf( "|Y -.--  |  Z --.. |         |         |\n");
+printf("---------------------------------------\n\n");
+
+printf("1. Morse a Texto\n\n2. Texto a Morse\n\n");
+
+scanf(" %i", &i);
+
+
+
+    switch (i){
+
+    case 1:
+    printf("Nombre del fichero a codificar a morse: ");
+    scanf("%s", &nombre1);
+    archivo = fopen(nombre1,"r");
+    if (archivo == NULL){ 
+     exit(1); 
+    } 
+    printf("\nEl contenido del archivo de prueba es \n\n"); 
+    while (feof(archivo) == 0){ 
+    fgets(frase,MAX,archivo); 
+    printf("%s\n",frase); 
+    }
+    FILE *tex;
+    tex = fopen("archivo.txt", "w");
+    e=0;
+
+        while( frase[e] != '\0'){
+
+          if(frase[e] == '.' ||  frase[e] == '-' ){
+            fprintf(tex,"A");
+    
+            e++;
+            }
+
+          if(frase[e] == '-' ||  frase[e] == '.' || frase[e] == '.' || frase[e] == '.' ){
+            fprintf(tex,"B");
+            e++;
+            }
+
+             if(frase[e] == '-' || frase[e] == '.' || frase[e] == '-' || frase[e] == '.' ){
+            
+            fprintf(tex,"C");
+            e++;
+            }
+
+
+	     if(frase[e] == ' '){
+		fprintf(tex," ");
+		e++;
+	     }
+	     fclose(tex);
+
+
+        //e++;
+        }
+
+
+
+    printf( "\n");
+    break;
+
+	case 2:
+    printf("Nombre del fichero a codificar a morse: ");
+    scanf("%s", &nombre1);
+    archivo = fopen(nombre1,"r");
+    if (archivo == NULL){ 
+     exit(1); 
+    } 
+    printf("\nEl contenido del archivo de prueba es \n\n"); 
+    while (feof(archivo) == 0){ 
+    fgets(frase,MAX,archivo); 
+    printf("%s\n",frase); 
+    }
+    
+    tex = fopen("archivo.txt", "w");
+    e=0;
+
+        while( frase[e] != '\0'){
+
+            if(frase[e] == 'a' || frase[e] == 'A' ){
+            printf( ".- ");
+            fprintf(tex,".-");
+            e++;
+            }
+	
+	if(frase[e] == 'b' || frase[e] == 'B' ){
+            printf( "-... ");
+            fprintf(tex,"-...");
+            e++;
+            }
+
+	if(frase[e] == 'c' || frase[e] == 'C' ){
+            printf( "-.-. ");
+            fprintf(tex,"-.-.");
+            e++;
+            }
+
+	if(frase[e] == 'd' || frase[e] == 'D' ){
+            printf( "-.. ");
+            fprintf(tex,"-..");
+            e++;
+            }
+
+	if(frase[e] == 'e' || frase[e] == 'E' ){
+            printf( ". ");
+            fprintf(tex,". ");
+            e++;
+            }
+
+	if(frase[e] == 'f' || frase[e] == 'F' ){
+            printf( "..-. ");
+            fprintf(tex,"..-.");
+            e++;
+            }
+
+	if(frase[e] == 'g' || frase[e] == 'G' ){
+            printf( "--. ");
+            fprintf(tex,"--.");
+            e++;
+            }
+
+	if(frase[e] == 'h' || frase[e] == 'H' ){
+            printf( ".... ");
+            fprintf(tex,"....");
+            e++;
+            }
+
+	if(frase[e] == 'i' || frase[e] == 'I' ){
+            printf( ".. ");
+            fprintf(tex,".. ");
+            e++;
+            }
+
+	if(frase[e] == 'j' || frase[e] == 'J' ){
+            printf( ".---  ");
+            fprintf(tex,".---");
+            e++;
+            }
+
+	if(frase[e] == 'k' || frase[e] == 'K' ){
+            printf( "-.- ");
+            fprintf(tex,"-.-");
+            e++;
+            }
+
+	if(frase[e] == 'l' || frase[e] == 'L' ){
+            printf( ".-.. ");
+            fprintf(tex,".-..");
+            e++;
+            }
+
+	if(frase[e] == 'm' || frase[e] == 'M' ){
+            printf( "-- ");
+            fprintf(tex,"--");
+            e++;
+            }
+
+	if(frase[e] == 'n' || frase[e] == 'N' ){
+            printf( "-. ");
+            fprintf(tex,"-.");
+            e++;
+            }
+
+	if(frase[e] == 'o' || frase[e] == 'O' ){
+            printf( "--- ");
+            fprintf(tex,"---");
+            e++;
+            }
+
+	if(frase[e] == 'p' || frase[e] == 'P' ){
+            printf( ".--. ");
+           fprintf(tex,".--."); 
+            e++;
+            }
+
+	if(frase[e] == 'q' || frase[e] == 'Q' ){
+            printf( "--.- ");
+            fprintf(tex,"--.-");
+            e++;
+            }
+
+	if(frase[e] == 'r' || frase[e] == 'R' ){
+            printf( "--.- ");
+            fprintf(tex,"--.-");
+            e++;
+            }
+
+	if(frase[e] == 's' || frase[e] == 'S' ){
+            printf( "... ");
+            fprintf(tex,"... ");
+            e++;
+            }
+
+	if(frase[e] == 't' || frase[e] == 'T' ){
+            printf( "- ");
+            fprintf(tex,"- ");
+            e++;
+            }
+
+	if(frase[e] == 'u' || frase[e] == 'U' ){
+            printf( "..-  ");
+            fprintf(tex,"..-");
+            e++;
+            }
+
+	if(frase[e] == 'v' || frase[e] == 'V' ){
+            printf( "...- ");
+            fprintf(tex,"...-");
+            e++;
+            }
+
+	if(frase[e] == 'w' || frase[e] == 'W' ){
+            printf( ".-- ");
+            fprintf(tex,".--");
+            e++;
+            }
+
+	if(frase[e] == 'x' || frase[e] == 'X' ){
+            printf( "-..- ");
+            fprintf(tex,"-..-");
+            e++;
+            }
+
+	if(frase[e] == 'y' || frase[e] == 'Y' ){
+            printf( "-.-- ");
+            fprintf(tex,"-.--");
+            e++;
+            }
+
+	if(frase[e] == 'z' || frase[e] == 'Z' ){
+            printf( "--.. ");
+            fprintf(tex,"--..");
+            e++;
+            }
+     fclose(tex);
+}
+
+    }
+getchar();
+getchar();
+
+}	
